@@ -9,7 +9,7 @@ import cv2
 from PIL import Image
 from datetime import datetime, date, time
 
-PATH='C:/Users/Jeong/Desktop/2024_AD_AI_program/video_images'
+PATH='https://youtu.be/2M_feLn4W4w'
 
 def disp(device):
     cap = cv2.VideoCapture(device)
