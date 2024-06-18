@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>demo_video.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1>自動運転とAI研修プログラムのデモビデオ</h1>
+<h2 id="youtube-videofasotecai">ビデオ:YouTube Video(Fasotec.ai)</h2>
+<h3 id="robot-control"><strong>ADAS例</strong></h3>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Title</th>
+<th>Contents</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>《Webots:人検知と高速道路での追い越し》</strong><br> カメラや距離センサによる認知と追い越しを行うデモ
+<img src="Qrcode/QR_1.png", width="150"></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/MdRlq9SiZCo?si=nNEn883gh5ZJd88O" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</td>
+<td><strong>《Webots: Recognition of Traffic Light and signs》</strong><br> 画像処理とAIモデルによる交通信号と標識を認知して制御を行うデモ
+<img src="Qrcode/QR_2.png", width =150></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/lJtL3tbkfIM?si=ZM0hr3wD3hQGolWB" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</td></tr>
+<tr>
+<td>2</td>
+<td><strong>《Webots: Vehicle Lane keep System》</strong><br> 車線色を検出する画像処理を行い、PID制御によってその車線を追従するデモ
+<img src="Qrcode/QR_3.png", width =150></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/Xz1XJCjCmwY?si=Yxhf3joQH9FAoq4Z" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</td>
+<td><strong>《Webots: Vehicle ACC》</strong><br> アダプティブクルーズコントロール
+<img src="Qrcode/QR_4.png",width =150></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/ujsd3rImars" title="ACC at Highway" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</td></tr>
+<tr>
+<td>*</td>
+<td><strong>■ 学習効果</strong><br></td>
+<td> 1. 実践的スキル: ACC/LKASの実装を通じて、先進運転支援システム(ADAS)の基本を習得<br>
+	 2. プログラミング能力: Pythonによるセンサー制御とPID制御の実装スキルが向上<br>
+	 3. 実際の交通状況への対応能力が養われ、安全運転技術の理解が深まる<br>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="robot-control"><strong>ROBOT Control例</strong></h3>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Title</th>
+<th>Contents</th>
+<th>Title</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>《JETBOT Motion: Webots vs. Real》</strong><br> JETBOT motion
+<img src="Qrcode/QR_jetbotMotion.png", width="150"></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/Asc1h8IRCWU" title="Webots JETBOT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>	
+<td><strong>■ 学習効果</strong><br></td>
+<td>1. 実際のロボットを操作し、AIモデルを適用する経験を通じて、実践的なスキルを習得<br>
+	2. 特に物体検出のような応用分野におけるAI技術の理解が深まる<br>
+	3. PythonやPyTorchなどの主要なプログラミング言語やライブラリの使用方法を学ぶことで、プログラミング能力が向上<br>
+	4. 実際のロボットやセンサーを扱うことで、予期せぬ問題やバグの対処スキルが深まる
+</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>《JETBOT Person Tracking》</strong><br> 
+<img src="Qrcode/QR_person.png", width="150"></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/o9TYLwUPuT0" title="Webots JETBOT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>	
+<td><strong>《JETBOT Line Following》</strong><br>
+<img src="Qrcode/QR_Line.png", width="150"></td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/wPXn3Q62WMk " title="Webots JETBOT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>	
+</tr>
+<tr>
+<td>3</td>
+<td><strong>《JETBOT: AIモデルによる障害物回避》</strong><br> ALEXNETを利用したシンプルな障害物の回避制御の例</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/8sA1lFQBJXQ" title="Webots JETBOT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+<td><strong>《JETBOT vs. LEGO robot》</strong><br> カメラの学習モデルを利用したJETBOTと赤外線の距離センサを利用したLEGOの比較例</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/Q3AFKfQOTDE" title="Webots JETBOT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>《Turtlebot3 Navigation2》</strong><br> ROS2 Navigation2を利用した実機ロボットの動作例</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/nfLkB1ni5Kk" title="Turtlebot3 Nav2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+<td><strong>《Simulation: Turlebot3 Lidar Scan Match+ FastSLAM》</strong><br> ROSパッケージを利用しないSLAMアルゴリズムの検証:Turtlebot3 </td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/hoQbMwWumE4" title="Webots Turlebot3 FastSLAM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+</tr>
+</tbody>
+</table>
+<h3><strong>AI(深層学習)を利用した検出と追従</strong></h3>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Title</th>
+<th>Contents</th>
+<th>Title</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>《生成AIの実装例》</strong><br> 
+<img src="Qrcode/QR_cv_ai.png", width="150"></td>
+Transformerを利用したコード生成モデルの実装</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/mDNbtYU3oqU" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+<td><strong>《Lane Detect(画像処理) vs. AI Model(YOLOPv2)》</strong><br> 
+<img src="Qrcode/QR_cv_ai.png", width="150"></td>
+車線検出に使う画像処理とAI学習モデルの性能比較(Hard編)</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/mDNbtYU3oqU" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>《Multi-Task Learning: HybridNets vs.YOLOPv2》</strong><br> 車線検出と車両などを同時に検出できるマルチタスク学習の紹介</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/L3mBdayZEx8" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+<td><strong>《Detect(YOLOv8) + Track(BoT-SORT)》</strong><br> 物体検出の学習モデルと追従モデルの組み合わせの例</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/7QgIPjbUQcE" title="Yolov8 Tracking" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+</tr>
+</tbody>
+</table>
+<h3 id="simulation-ex"><strong>自動走行Simulationの実装と検証(CARLA)</strong></h3>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Title</th>
+<th>Contents</th>
+<th>Title</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>《CARLA: 自動走行 Traffic ScenarioRunner使用例》</strong><br> CARLA+Open Scenario/XML テスト</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/o8AxQc1wnzE" title="CARLA ScenarioRunner使用例" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+<td><strong>《CARLA: 強化学習を用いたレーンチェンジ》</strong><br> CARLA + OpenAI GYM + Stablebaselines RLアルゴリズムを使った車線変更学習</td>
+<td><iframe width="560" height="315" src="https://www.youtube.com/embed/lCimas4AzfU" title="CARLA + 深層強化学習で学習したモデルのLane Change" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></td>
+</tr>
+<tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Copyright 2024 Fasotec AI team(SD_AI@fasotec.co.jp)</strong></p>
+</body>
+</html>
